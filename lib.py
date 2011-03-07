@@ -40,7 +40,8 @@ def save_content(posts):
         output = os.path.join(settings.POST_DIR, filename)
         if not os.path.isdir(settings.POST_DIR):
             os.mkdir(settings.POST_DIR)
-        open(output, 'w').write(post_template.render(post=post).encode('utf-8'))
+        if not os.path.exists(output):
+            open(output, 'w').write(post_template.render(post=post).encode('utf-8'))
 
 def regenerate_site():
     os.chdir(settings.SITE_DIR)

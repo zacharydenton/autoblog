@@ -31,4 +31,4 @@ class Content(object):
 
     @property
     def tags(self):
-        return [' '.join(tup) for tup in lib.collocations(self.content)]
+        return [' '.join(tup) for tup in lib.collocations(self.content, threshold=2)][:5]

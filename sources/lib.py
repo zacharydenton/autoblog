@@ -72,7 +72,7 @@ def summarize(input, num_sentences=2):
         else:
             return output
 
-def collocations(input, scorer=None, compare_scorer=None):
+def collocations(input, threshold=3, scorer=None, compare_scorer=None):
     content = clean_html(input)
 
     if scorer is None:
@@ -81,14 +81,14 @@ def collocations(input, scorer=None, compare_scorer=None):
         compare_scorer = BigramAssocMeasures.raw_freq
 
     ignored_words = nltk.corpus.stopwords.words('english')
-    word_filter = lambda w: len(w) < 3 or w.lower() in ignored_words
+    word_filter = lambda w: len(w) < 3 or w.lower() in ignored_words or w.isdigit()
 
     tokenizer = RegexpTokenizer('\w+')
     words = [word.lower()
              for word in tokenizer.tokenize(content)]
 
     cf = nltk.collocations.BigramCollocationFinder.from_words(words)
-    cf.apply_freq_filter(3)
+    cf.apply_freq_filter(threshold)
     cf.apply_word_filter(word_filter)
     return cf.nbest(scorer, 15)
 

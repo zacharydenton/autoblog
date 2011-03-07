@@ -61,7 +61,16 @@ class SimpleSummarizer:
 
 def summarize(input, num_sentences=2):
     content = ''.join(BeautifulSoup(input).findAll(text=True))
-    return SimpleSummarizer().summarize(content, num_sentences)
+    output = SimpleSummarizer().summarize(content, num_sentences)
+    if len(output) <= 155:
+        return output
+    else:
+        output = SimpleSummarizer().summarize(content, 1)
+        if len(output) > 155:
+            return output[:152] + '...'
+        else:
+            return output
+
 
 def html2markdown(input):
     markdown_converter = html2text._html2text(None, '')

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 import sources
 import filters
 
@@ -11,6 +12,9 @@ SOURCES = [
 ]
 
 FILTERS = [
-    filters.seo.SeoFilter(),
-    filters.rewrite.GoogleTranslateFilter(),
+    filters.seo.NoFollow(),
+    filters.rewrite.GoogleTranslateFilter('sv', 'en'),
 ]
+
+SITE_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'site')
+POST_DIR = os.path.join(SITE_DIR, '_posts')

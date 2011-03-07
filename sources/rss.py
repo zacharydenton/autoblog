@@ -19,7 +19,7 @@ class RssSource(ContentSource):
                     yield Content(
                         title=e.title,
                         content=e.content[0].value,
-                        time=e.date_parsed,
+                        time=datetime.datetime(*e.date_parsed[:6]),
                     )
                 except Exception as e:
                     print e

@@ -13,7 +13,7 @@ SOURCES = [
 
 FILTERS = [
     filters.seo.NoFollow(),
-    filters.rewrite.GoogleTranslateFilter('sv', 'en'),
+    #filters.rewrite.GoogleTranslateFilter('sv', 'en'),
 ]
 
 SITE_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'site')

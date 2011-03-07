@@ -28,3 +28,7 @@ class Content(object):
     @property
     def excerpt(self):
         return lib.summarize(self.content)
+
+    @property
+    def tags(self):
+        return [' '.join(tup) for tup in lib.collocations(self.content)]

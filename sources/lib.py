@@ -4,6 +4,7 @@ import nltk
 import html2text
 from nltk.probability import FreqDist 
 from nltk.tokenize import RegexpTokenizer
+from nltk.metrics import BigramAssocMeasures, spearman_correlation, ranks_from_scores
 from nltk.corpus import stopwords
 import nltk.data
 
@@ -60,7 +61,7 @@ class SimpleSummarizer:
         return ' '.join(output_sentences)
 
 def summarize(input, num_sentences=2):
-    content = ''.join(BeautifulSoup(input).findAll(text=True))
+    content = clean_html(input)
     output = SimpleSummarizer().summarize(content, num_sentences)
     if len(output) <= 155:
         return output
@@ -71,6 +72,25 @@ def summarize(input, num_sentences=2):
         else:
             return output
 
+def collocations(input, scorer=None, compare_scorer=None):
+    content = clean_html(input)
+
+    if scorer is None:
+        scorer = BigramAssocMeasures.likelihood_ratio
+    if compare_scorer is None:
+        compare_scorer = BigramAssocMeasures.raw_freq
+
+    ignored_words = nltk.corpus.stopwords.words('english')
+    word_filter = lambda w: len(w) < 3 or w.lower() in ignored_words
+
+    tokenizer = RegexpTokenizer('\w+')
+    words = [word.lower()
+             for word in tokenizer.tokenize(content)]
+
+    cf = nltk.collocations.BigramCollocationFinder.from_words(words)
+    cf.apply_freq_filter(3)
+    cf.apply_word_filter(word_filter)
+    return cf.nbest(scorer, 15)
 
 def html2markdown(input):
     markdown_converter = html2text._html2text(None, '')
@@ -94,4 +114,5 @@ def slugify(value):
     value = unicode(_slugify_strip_re.sub('', value).strip().lower())
     return _slugify_hyphenate_re.sub('-', value)
 
-
+def clean_html(html):
+    return ''.join(BeautifulSoup(html).findAll(text=True))

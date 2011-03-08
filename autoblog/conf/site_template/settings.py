@@ -16,10 +16,9 @@ SOURCES = [
 
 FILTERS = [
     filters.seo.NoFollow(),
-    filters.rewrite.GoogleTranslateFilter('sv', 'en', percentage=0.3),
-    #filters.discard.AfterString('Buy now!')
+    filters.rewrite.GoogleTranslateFilter('es', 'en', percentage=0.3),
 ]
 
 SITE_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'site')
 POST_DIR = os.path.join(SITE_DIR, '_posts')
-TEMPLATES = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
+TEMPLATES = jinja2.Environment(loader=jinja2.PackageLoader('autoblog', 'templates'))

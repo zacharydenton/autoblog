@@ -3,6 +3,7 @@ import urllib, urllib2
 import nltk
 import json
 from api import Filter
+import random
 
 class GoogleTranslateFilter(Filter):
     '''
@@ -10,17 +11,21 @@ class GoogleTranslateFilter(Filter):
 
     E.g. English->German->English will yield a slightly different text.
     '''
-    def __init__(self, *languages):
+    def __init__(self, *languages, percentage=1.0):
         self.languages = languages
+        self.percentage = percentage
 
     def filter(self, input):
-        output = input
-        try:
-            for language in self.languages:
-                output = self.translate(output, language)
-            return output
-        except Exception as e:
-            print e
+        # only translate a certain percentage of articles
+        if random.random() < self.percentage:
+            output = input
+            try:
+                for language in self.languages:
+                    output = self.translate(output, language)
+                return output
+            except Exception as e:
+                return input
+        else:
             return input
 
     def translate(self, input, language, fmt='html'):

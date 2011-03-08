@@ -6,14 +6,19 @@ from jinja import from_string
 import settings
 from sources.lib import html2markdown
 
+def get_filename(post):
+    basename = '%s-%s.html' % (post.time.strftime('%Y-%m-%d'), post.slug)
+    filename = os.path.join(settings.POST_DIR, basename)
+    return filename
+
 def syndicate_content():
     posts = []
     for source in settings.SOURCES:
         posts += source.get_posts()
 
-    for item in posts:
+    for post in posts:
         for content_filter in settings.FILTERS:
-            item.content = content_filter.filter(item.content)
+            post.content = content_filter.filter(post.content)
 
     return posts
 
@@ -36,13 +41,7 @@ excerpt: '{{ post.excerpt }}'
 
 def save_content(posts):
     for post in posts:
-        filename = '%s-%s.html' % (post.time.strftime('%Y-%m-%d'), post.slug)
-        output = os.path.join(settings.POST_DIR, filename)
+        output = get_filename(post)
         if not os.path.isdir(settings.POST_DIR):
             os.mkdir(settings.POST_DIR)
-        if not os.path.exists(output):
-            open(output, 'w').write(post_template.render(post=post).encode('utf-8'))
-
-def regenerate_site():
-    os.chdir(settings.SITE_DIR)
-    subprocess.call('jekyll')
+        open(output, 'w').write(post_template.render(post=post).encode('utf-8'))

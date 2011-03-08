@@ -3,6 +3,8 @@ import os
 import sources
 import filters
 
+DEBUG = True
+
 feed_urls = [
     'http://wordpress.org/news/feed/',
 ]
@@ -13,7 +15,8 @@ SOURCES = [
 
 FILTERS = [
     filters.seo.NoFollow(),
-    #filters.rewrite.GoogleTranslateFilter('sv', 'en'),
+    #filters.rewrite.GoogleTranslateFilter('sv', 'en', percentage=0.3),
+    #filters.discard.AfterString('Buy now!')
 ]
 
 SITE_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'site')

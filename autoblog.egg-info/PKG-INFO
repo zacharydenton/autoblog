@@ -1,0 +1,15 @@
+Metadata-Version: 1.0
+Name: autoblog
+Version: 0.2
+Summary: A minimalistic autoblog which adheres to Unix principles.
+Home-page: http://zacharydenton.com/code/autoblog/
+Author: Zach Denton
+Author-email: zacharydenton@gmail.com
+License: UNKNOWN
+Description: 
+        Autoblogging software written in Python. Syndicated content,
+        sends the content through a series of filters, and outputs
+        in a format that Jekyll can understand.
+        
+Platform: UNKNOWN
+Classifier: Topic :: Text Processing

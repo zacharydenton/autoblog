@@ -2,8 +2,8 @@
 '''
 Installer script for autoblog.
 '''
-
-from distutils.core import setup
+from setuptools import setup, find_packages
+import os
 import autoblog
 
 setup (
@@ -15,11 +15,8 @@ setup (
     url = autoblog.__url__,
     long_description = autoblog.__longdescr__,
     classifiers = autoblog.__classifiers__,
-    packages = ['autoblog',
-                'autoblog.sources',
-                'autoblog.filters',
-                'autoblog.templates',
-               ],
+    packages = find_packages(),
+    include_package_data=True,
     scripts = ['autoblog-admin.py'],
-    requires = ['nltk']
+    install_requires = ['nltk']
 )

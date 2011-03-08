@@ -1,14 +1,17 @@
 #!/usr/bin/env python
 import argparse
 import autoblog
+import os
+import sys
+import lib
 
-def execute_from_command_line()
+def execute_from_command_line():
     parser = argparse.ArgumentParser(description='Automatically compile content from RSS feeds into a single blog.')
     subparsers = parser.add_subparsers()
 
     # init command
     parser_init = subparsers.add_parser('init', help='Initialize a new autoblog')
-    parser_init.add_argument('path', help='where to create the autoblog (default: current directory)')
+    parser_init.add_argument('sitename', help='a name for the new autoblog')
     parser_init.set_defaults(func=init)
 
     # update command
@@ -23,7 +26,7 @@ def execute_from_command_line()
     args = parser.parse_args()
     args.func(args)
 
-def execute_manager(settings_mod)
+def execute_manager(settings_mod):
     setup_environ(settings_mod)
     execute_from_command_line()
 
@@ -131,16 +134,50 @@ def _make_writeable(filename):
         new_permissions = stat.S_IMODE(st.st_mode) | stat.S_IWUSR
         os.chmod(filename, new_permissions)
 
-def init(self, args):
+def _resolve_name(name, package, level):
+    """Return the absolute name of the module to be imported."""
+    if not hasattr(package, 'rindex'):
+        raise ValueError("'package' not set to a string")
+    dot = len(package)
+    for x in xrange(level, 1, -1):
+        try:
+            dot = package.rindex('.', 0, dot)
+        except ValueError:
+            raise ValueError("attempted relative import beyond top-level "
+                              "package")
+    return "%s.%s" % (package[:dot], name)
+
+
+def import_module(name, package=None):
+    """Import a module.
+
+    The 'package' argument is required when performing a relative import. It
+    specifies the package to use as the anchor point from which to resolve the
+    relative import to an absolute import.
+
+    """
+    if name.startswith('.'):
+        if not package:
+            raise TypeError("relative imports require the 'package' argument")
+        level = 0
+        for character in name:
+            if character != '.':
+                break
+            level += 1
+        name = _resolve_name(name[level:], package, level)
+    __import__(name)
+    return sys.modules[name]
+
+def init(args):
     directory = os.getcwd()
     name = args.sitename
     copy_helper(name, directory)
 
-def update(self, args):
+def update(args):
     posts = lib.syndicate_content()
     lib.save_content(posts)
 
-def scour(self, args):
+def scour(args):
     feeds = lib.find_feeds(args.phrase)
     for feed in feeds:
         print feed

@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import os
-import sources
-import filters
+import autoblog
 import jinja2
 
 DEBUG = True
@@ -11,12 +10,12 @@ feed_urls = [
 ]
 
 SOURCES = [
-    sources.rss.RssSource(feed_urls),
+    autoblog.sources.rss.RssSource(feed_urls),
 ]
 
 FILTERS = [
-    filters.seo.NoFollow(),
-    filters.rewrite.GoogleTranslateFilter('es', 'en', percentage=0.3),
+    autoblog.filters.seo.NoFollow(),
+    autoblog.filters.rewrite.GoogleTranslateFilter('es', 'en', percentage=0.3),
 ]
 
 SITE_DIR = os.path.abspath(os.path.dirname(__file__))

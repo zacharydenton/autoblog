@@ -1,2 +1,4 @@
 *.pyc
 site/_site/*
+build/*
+dist/*

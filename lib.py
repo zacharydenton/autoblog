@@ -3,7 +3,6 @@ import os
 import subprocess
 
 import settings
-from sources.lib import html2markdown
 
 def get_filename(post):
     basename = '%s-%s.html' % (post.time.strftime('%Y-%m-%d'), post.slug)

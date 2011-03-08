@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import re
 import nltk
+import lxml.html
 import html2text
 from nltk.probability import FreqDist 
 from nltk.tokenize import RegexpTokenizer
@@ -60,17 +61,10 @@ class SimpleSummarizer:
         # concatinate the sentences into a single string
         return ' '.join(output_sentences)
 
-def summarize(input, num_sentences=2):
+def summarize(input, num_sentences=1):
     content = clean_html(input)
-    output = SimpleSummarizer().summarize(content, num_sentences)
-    if len(output) <= 155:
-        return output
-    else:
-        output = SimpleSummarizer().summarize(content, 1)
-        if len(output) > 155:
-            return output[:152] + '...'
-        else:
-            return output
+    output = SimpleSummarizer().summarize(content, num_sentences).replace('\n', ' ').strip()
+    return output
 
 def collocations(input, threshold=3, scorer=None, compare_scorer=None):
     content = clean_html(input)

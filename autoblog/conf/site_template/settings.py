@@ -19,6 +19,6 @@ FILTERS = [
     filters.rewrite.GoogleTranslateFilter('es', 'en', percentage=0.3),
 ]
 
-SITE_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'site')
+SITE_DIR = os.path.abspath(os.path.dirname(__file__))
 POST_DIR = os.path.join(SITE_DIR, '_posts')
 TEMPLATES = jinja2.Environment(loader=jinja2.PackageLoader('autoblog', 'templates'))

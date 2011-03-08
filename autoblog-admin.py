@@ -1,9 +1,6 @@
 #!/usr/bin/env python
-import argparse
-
-def main():
-    parser = argparse.ArgumentParser()
+from autoblog import management
 
 if __name__ == "__main__":
-    main()
+    management.execute_from_command_line()
 

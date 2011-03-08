@@ -20,4 +20,6 @@ FILTERS = [
 
 SITE_DIR = os.path.abspath(os.path.dirname(__file__))
 POST_DIR = os.path.join(SITE_DIR, '_posts')
+BUILD_DIR = os.path.join(SITE_DIR, '_site')
 TEMPLATES = jinja2.Environment(loader=jinja2.PackageLoader('autoblog', 'templates'))
+REMOTE = 'zacharydenton@ultralightbackpacking.net:var/www/ultralightbackpacking.net/'

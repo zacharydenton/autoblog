@@ -1,9 +1,15 @@
 #!/usr/bin/env python
 import argparse
 import autoblog
+import subprocess
 import os
 import sys
-import lib
+
+try:
+    import settings
+    import lib
+except ImportError:
+    pass
 
 def execute_from_command_line():
     parser = argparse.ArgumentParser(description='Automatically compile content from RSS feeds into a single blog.')
@@ -17,6 +23,18 @@ def execute_from_command_line():
     # update command
     parser_update = subparsers.add_parser('update', help='Update the autoblog')
     parser_update.set_defaults(func=update)
+
+    # build command
+    parser_build = subparsers.add_parser('build', help='build the autoblog')
+    parser_build.set_defaults(func=build)
+
+    # deploy command
+    parser_deploy = subparsers.add_parser('deploy', help='deploy the autoblog to server')
+    parser_deploy.set_defaults(func=deploy)
+
+    # sync command
+    parser_sync = subparsers.add_parser('sync', help='update -> build -> deploy')
+    parser_sync.set_defaults(func=sync)
 
     # scour command
     parser_scour = subparsers.add_parser('scour', help='Given a keyphrase, scour the internet for suitable content feeds')
@@ -181,3 +199,21 @@ def scour(args):
     feeds = lib.find_feeds(args.phrase)
     for feed in feeds:
         print feed
+
+def deploy(args):
+    local = settings.BUILD_DIR
+    if not local.endswith('/'):
+        local += '/'
+    remote = settings.REMOTE
+    if not remote.endswith('/'):
+        remote += '/'
+    subprocess.call(['rsync', '-rtz', local, remote])
+
+def build(args):
+    os.chdir(settings.SITE_DIR)
+    subprocess.call('jekyll')
+
+def sync(args):
+    update(args)
+    build(args)
+    deploy(args)

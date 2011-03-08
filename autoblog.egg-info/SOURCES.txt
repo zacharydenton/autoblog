@@ -10,7 +10,6 @@ autoblog.egg-info/dependency_links.txt
 autoblog.egg-info/requires.txt
 autoblog.egg-info/top_level.txt
 autoblog/conf/__init__.py
-autoblog/conf/site_template/Rakefile
 autoblog/conf/site_template/_config.yml
 autoblog/conf/site_template/atom.xml
 autoblog/conf/site_template/index.html

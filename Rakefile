@@ -13,13 +13,17 @@ task :server do
 	jekyll '--server --auto'
 end
 
+desc 'Synchronize posts from content sources'
+task :sync do
+    sh 'python autoblog.py'
+end
+
 desc 'Build and deploy'
 task :deploy => :build do
 	sh 'rsync -rtzh --progress --delete site/_site/ zacharydenton@zacharydenton.com:~/zacharydenton.com/'
 end
 
 def jekyll(opts = '')
-    sh 'python autoblog.py'
 	sh 'rm -rf site/_site'
 	sh 'cd site; jekyll ' + opts
 end

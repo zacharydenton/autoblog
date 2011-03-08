@@ -17,18 +17,17 @@ class Content(object):
         self.title = title
         self.content = content
         self.time = time
+        self.excerpt = lib.summarize(self.content).strip()
+        self.slug = lib.slugify(self.title)
+        self.tags = [' '.join(tup) for tup in lib.collocations(self.content, threshold=2)][:5]
 
         for attr, val in kwargs.items():
             setattr(self, attr, val)
 
     @property
-    def slug(self):
-        return lib.slugify(self.title)
+    def yaml_title(self):
+        return self.title.replace(':', ' -').replace('\n', ' ').strip()
 
     @property
-    def excerpt(self):
-        return lib.summarize(self.content)
-
-    @property
-    def tags(self):
-        return [' '.join(tup) for tup in lib.collocations(self.content, threshold=2)][:5]
+    def yaml_excerpt(self):
+        return self.excerpt.replace(':', ' -').replace('\n', ' ').strip()

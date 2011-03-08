@@ -1,0 +1,12 @@
+---
+layout: post
+title: |
+    {{ post.yaml_title }}
+tags:{% for tag in post.tags %}
+- {{ tag }}{% endfor %}
+categories:{% for category in post.categories %}
+- {{ category }}{% endfor %}
+excerpt: |
+    {{ post.yaml_excerpt }}
+---
+{{ post.content }}

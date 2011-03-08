@@ -11,9 +11,9 @@ class GoogleTranslateFilter(Filter):
 
     E.g. English->German->English will yield a slightly different text.
     '''
-    def __init__(self, *languages, percentage=1.0):
+    def __init__(self, *languages, **kwargs):
         self.languages = languages
-        self.percentage = percentage
+        self.percentage = kwargs.get('percentage', 1.0)
 
     def filter(self, input):
         # only translate a certain percentage of articles

@@ -2,6 +2,7 @@
 import os
 import sources
 import filters
+import jinja2
 
 DEBUG = True
 
@@ -21,3 +22,4 @@ FILTERS = [
 
 SITE_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'site')
 POST_DIR = os.path.join(SITE_DIR, '_posts')
+TEMPLATES = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))

@@ -16,7 +16,7 @@ SOURCES = [
 
 FILTERS = [
     filters.seo.NoFollow(),
-    #filters.rewrite.GoogleTranslateFilter('sv', 'en', percentage=0.3),
+    filters.rewrite.GoogleTranslateFilter('sv', 'en', percentage=0.3),
     #filters.discard.AfterString('Buy now!')
 ]
 

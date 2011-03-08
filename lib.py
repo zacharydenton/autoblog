@@ -16,10 +16,10 @@ def syndicate_content():
         posts += source.get_posts()
 
     for post in posts:
-        if settings.DEBUG:
-            print 'filtering %s' % post.title
-        for content_filter in settings.FILTERS:
-            post.content = content_filter.filter(post.content)
+        for filter in settings.FILTERS:
+            if settings.DEBUG:
+                print 'applying %s filter to %s' % (filter.__class__.__name__, post.title)
+            post.content = filter.filter(post.content)
 
     return posts
 

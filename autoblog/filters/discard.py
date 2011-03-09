@@ -33,3 +33,18 @@ class HTMLAfterString(AfterString):
             except AttributeError:
                 pass
         return lxml.html.tostring(doc)
+
+class HTMLIds(Filter):
+    '''
+    Discards ID attributes of all elements.
+    '''
+    def filter(self, input):
+        doc = lxml.html.fromstring(input)
+        for node in doc.getiterator():
+            try:
+                del node.attrib['id']
+            except:
+                pass
+        return lxml.html.tostring(doc)
+
+

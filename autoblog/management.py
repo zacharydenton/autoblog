@@ -33,13 +33,17 @@ def execute_from_command_line():
     parser_deploy.set_defaults(func=deploy)
 
     # sync command
-    parser_sync = subparsers.add_parser('sync', help='update -> build -> deploy')
+    parser_sync = subparsers.add_parser('sync', help='update -> build -> deploy -> ping')
     parser_sync.set_defaults(func=sync)
 
     # scour command
     parser_scour = subparsers.add_parser('scour', help='Given a keyphrase, scour the internet for suitable content feeds')
     parser_scour.add_argument('phrase', help='the keyphrase to search for')
     parser_scour.set_defaults(func=scour)
+
+    # ping command
+    parser_ping = subparsers.add_parser('ping', help='Let people know the site has been updated')
+    parser_ping.set_defaults(func=ping)
 
     args = parser.parse_args()
     args.func(args)
@@ -212,7 +216,13 @@ def build(args):
     os.chdir(settings.SITE_DIR)
     subprocess.call('jekyll')
 
+def ping(args):
+    import pubsubhubbub_publisher as pubsub
+    pubsub.publish('http://pubsubhubbub.appspot.com/publish', settings.FEED_URL)
+
 def sync(args):
     update(args)
     build(args)
     deploy(args)
+    ping(args)
+

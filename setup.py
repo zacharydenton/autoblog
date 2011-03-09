@@ -22,6 +22,6 @@ setup (
         'nltk',
         'jinja2',
         'lxml',
-        'BeautifulSoup'
+        'BeautifulSoup',
     ]
 )

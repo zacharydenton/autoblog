@@ -26,4 +26,4 @@ class ValidHTML(Filter):
     Takes any HTML, and returns valid HTML.
     '''
     def filter(self, input):
-        return lxml.html.tostring(lxml.html.html5parser.fromstring(input))
+        return lxml.html.tostring(lxml.html.fromstring(input))

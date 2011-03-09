@@ -18,5 +18,10 @@ setup (
     packages = find_packages(),
     include_package_data=True,
     scripts = ['autoblog-admin.py'],
-    install_requires = ['nltk']
+    install_requires = [
+        'nltk',
+        'jinja2',
+        'lxml',
+        'BeautifulSoup'
+    ]
 )

@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 import os
+import json
+import urllib
 import subprocess
 
 import settings
@@ -31,3 +33,14 @@ def save_content(posts):
         if not os.path.isdir(settings.POST_DIR):
             os.mkdir(settings.POST_DIR)
         open(output, 'w').write(post_template.render(post=post).encode('utf-8'))
+
+def find_feeds(keyphrase):
+    '''
+    Search for feeds matching a keyphrase.
+    '''
+    query = urllib.urlencode({'v': '1.0', 'q': keyphrase})
+    url = "http://ajax.googleapis.com/ajax/services/search/web?" + query
+    results_page = urllib.urlopen(url)
+    results = json.loads(results_page.read())
+    
+    return [result['url'] for result in results['responseData']['results']]

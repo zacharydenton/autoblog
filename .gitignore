@@ -2,4 +2,4 @@
 site/_site/*
 build/*
 dist/*
-.autoblog.egg-info/*
+*egg*/*

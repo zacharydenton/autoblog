@@ -1,1 +1,2 @@
 recursive-include autoblog/templates *
+recursive-include autoblog/conf/site_template *

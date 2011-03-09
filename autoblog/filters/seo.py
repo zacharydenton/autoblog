@@ -9,7 +9,10 @@ class NoFollow(Filter):
     def filter(self, input):
         doc = lxml.html.fromstring(input)
         for a in doc.cssselect('a'):
-            if a.get('href').startswith('http'):
-                a.set('rel', 'nofollow')
+            try:
+                if a.get('href').startswith('http'):
+                    a.set('rel', 'nofollow')
+            except:
+                pass
         return lxml.html.tostring(doc)
 

@@ -13,6 +13,7 @@ class RssSource(ContentSource):
 
     def get_posts(self):
         for feed_url in self.feed_urls:
+            print "processing %s" % feed_url
             doc = feedparser.parse(feed_url)
             for e in doc.entries:
                 try:
@@ -22,7 +23,7 @@ class RssSource(ContentSource):
                         time=datetime.datetime(*e.date_parsed[:6]),
                     )
                 except Exception as e:
-                    print e
+                    pass
 
 
 

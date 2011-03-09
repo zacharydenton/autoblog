@@ -217,7 +217,7 @@ def build(args):
     subprocess.call('jekyll')
 
 def ping(args):
-    import pubsubhubbub_publisher as pubsub
+    import pubsubhubbub_publish as pubsub
     pubsub.publish('http://pubsubhubbub.appspot.com/publish', settings.FEED_URL)
 
 def sync(args):

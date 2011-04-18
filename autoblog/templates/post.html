@@ -8,5 +8,9 @@ categories:{% for category in post.categories %}
 - {{ category }}{% endfor %}
 excerpt: |
     {{ post.yaml_excerpt }}
+original_source: |
+    {{ post.source }}
+original_url: |
+    {{ post.url }}        
 ---
 {{ post.content }}

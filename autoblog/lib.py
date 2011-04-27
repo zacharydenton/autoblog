@@ -23,7 +23,11 @@ def syndicate_content():
 
     for post in posts:
         for filter in settings.FILTERS:
-            post.content = filter.filter(post.content)
+            try:
+                post.content = filter.filter(post.content)
+            except Exception as e:
+                print e
+                pass
 
     return posts
 

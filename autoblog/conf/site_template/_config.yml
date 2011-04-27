@@ -1,3 +1,7 @@
 markdown: rdiscount
 pygments: true
 permalink: /:title
+lsi: false
+main_title: Autoblog
+keywords: 
+- autoblog

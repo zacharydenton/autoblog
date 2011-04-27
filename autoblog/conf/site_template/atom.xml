@@ -4,22 +4,23 @@ layout: nil
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
  
- <title>Ultralight Backpacking</title>
- <link href="http://ultralightbackpacking.net/atom.xml" rel="self"/>
- <link href="http://ultralightbackpacking.net/"/>
+ <title>Autoblog</title>
+ <link href="http://example.com/atom.xml" rel="self"/>
+ <link href="https://pubsubhubbub.appspot.com" rel="hub" />
+ <link href="http://example.com/"/>
  <updated>{{ site.time | date_to_xmlschema }}</updated>
- <id>http://ultralightbackpacking.net/</id>
+ <id>http://example.com/</id>
  <author>
-   <name>Ultralight Backpacking</name>
-   <email>contact@ultralightbackpacking.net</email>
+   <name>An Author</name>
+   <email>contact@example.com</email>
  </author>
 
- {% for post in site.posts %}
+ {% for post in site.posts | limit: 20 %}
  <entry>
    <title>{{ post.title }}</title>
-   <link href="http://ultralightbackpacking.net{{ post.url }}"/>
+   <link href="http://example.com{{ post.url }}"/>
    <updated>{{ post.date | date_to_xmlschema }}</updated>
-   <id>http://ultralightbackpacking.net{{ post.id }}</id>
+   <id>http://example.com{{ post.id }}</id>
    <content type="html">{{ post.content | xml_escape }}</content>
  </entry>
  {% endfor %}

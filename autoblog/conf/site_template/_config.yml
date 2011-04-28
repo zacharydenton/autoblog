@@ -3,5 +3,6 @@ pygments: true
 permalink: /:title
 lsi: false
 main_title: CHANGEME
+tagline: CHANGEME
 keywords: 
 - CHANGEME

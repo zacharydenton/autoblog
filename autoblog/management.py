@@ -210,7 +210,7 @@ def deploy(args):
     remote = settings.REMOTE
     if not remote.endswith('/'):
         remote += '/'
-    subprocess.call(['rsync', '-rtz', local, remote])
+    subprocess.call(['rsync', '-rtz', '--delete', local, remote])
 
 def build(args):
     os.chdir(settings.SITE_DIR)

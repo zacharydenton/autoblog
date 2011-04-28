@@ -3,7 +3,7 @@
 # metadata
 __author__ = 'Zach Denton'
 __author_email__ = 'zacharydenton@gmail.com'
-__version__ = '0.2'
+__version__ = '0.3'
 __url__ = 'http://zacharydenton.com/code/autoblog/'
 __longdescr__ = '''
 Autoblogging software written in Python. Syndicated content,

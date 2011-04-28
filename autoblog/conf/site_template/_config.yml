@@ -2,6 +2,6 @@ markdown: rdiscount
 pygments: true
 permalink: /:title
 lsi: false
-main_title: Autoblog
+main_title: CHANGEME
 keywords: 
-- autoblog
+- CHANGEME

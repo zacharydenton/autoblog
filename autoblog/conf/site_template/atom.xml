@@ -5,22 +5,22 @@ layout: nil
 <feed xmlns="http://www.w3.org/2005/Atom">
  
  <title>Autoblog</title>
- <link href="http://example.com/atom.xml" rel="self"/>
+ <link href="http://CHANGEME/atom.xml" rel="self"/>
  <link href="https://pubsubhubbub.appspot.com" rel="hub" />
- <link href="http://example.com/"/>
+ <link href="http://CHANGEME/"/>
  <updated>{{ site.time | date_to_xmlschema }}</updated>
- <id>http://example.com/</id>
+ <id>http://CHANGEME/</id>
  <author>
-   <name>An Author</name>
-   <email>contact@example.com</email>
+   <name>CHANGEME</name>
+   <email>contact@CHANGEME</email>
  </author>
 
  {% for post in site.posts | limit: 20 %}
  <entry>
    <title>{{ post.title }}</title>
-   <link href="http://example.com{{ post.url }}"/>
+   <link href="http://CHANGEME{{ post.url }}"/>
    <updated>{{ post.date | date_to_xmlschema }}</updated>
-   <id>http://example.com{{ post.id }}</id>
+   <id>http://CHANGEME{{ post.id }}</id>
    <content type="html">{{ post.content | xml_escape }}</content>
  </entry>
  {% endfor %}

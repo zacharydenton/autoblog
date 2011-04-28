@@ -29,5 +29,5 @@ SITE_DIR = os.path.abspath(os.path.dirname(__file__))
 POST_DIR = os.path.join(SITE_DIR, '_posts')
 BUILD_DIR = os.path.join(SITE_DIR, '_site')
 TEMPLATES = jinja2.Environment(loader=jinja2.PackageLoader('autoblog', 'templates'))
-REMOTE = 'you@example.com:var/www/example.com/'
-FEED_URL='http://example.com/atom.xml'
+REMOTE = 'CHANGEME@CHANGEME:CHANGEME/'
+FEED_URL='http://CHANGEME/atom.xml'

@@ -123,9 +123,9 @@ def copy_helper(name, directory):
         relative_dir = d[len(template_dir)+1:].replace('site_name', name)
         if relative_dir:
             os.mkdir(os.path.join(top_dir, relative_dir))
-        for subdir in subdirs[:]:
-            if subdir.startswith('.'):
-                subdirs.remove(subdir)
+        # for subdir in subdirs[:]:
+            # if subdir.startswith('.'):
+                # subdirs.remove(subdir)
         for f in files:
             path_old = os.path.join(d, f)
             path_new = os.path.join(top_dir, relative_dir, f.replace('site_name', name))

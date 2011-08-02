@@ -25,6 +25,7 @@ class RssSource(ContentSource):
                         url=e.link,
                     )
                 except Exception as e:
+                    print e
                     pass
 
 

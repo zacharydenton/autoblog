@@ -25,16 +25,16 @@ def execute_from_command_line():
     parser_update.set_defaults(func=update)
 
     # build command
-    parser_build = subparsers.add_parser('build', help='build the autoblog')
-    parser_build.set_defaults(func=build)
+    # parser_build = subparsers.add_parser('build', help='build the autoblog')
+    # parser_build.set_defaults(func=build)
 
     # deploy command
-    parser_deploy = subparsers.add_parser('deploy', help='deploy the autoblog to server')
-    parser_deploy.set_defaults(func=deploy)
+    # parser_deploy = subparsers.add_parser('deploy', help='deploy the autoblog to server')
+    # parser_deploy.set_defaults(func=deploy)
 
     # sync command
-    parser_sync = subparsers.add_parser('sync', help='update -> build -> deploy -> ping')
-    parser_sync.set_defaults(func=sync)
+    # parser_sync = subparsers.add_parser('sync', help='update -> build -> deploy -> ping')
+    # parser_sync.set_defaults(func=sync)
 
     # scour command
     parser_scour = subparsers.add_parser('scour', help='Given a keyphrase, scour the internet for suitable content feeds')
@@ -210,7 +210,7 @@ def deploy(args):
     remote = settings.REMOTE
     if not remote.endswith('/'):
         remote += '/'
-    subprocess.call(['rsync', '-rtz', '--delete', local, remote])
+    subprocess.call(['rsync', '-rt', '--delete', local, remote])
 
 def build(args):
     os.chdir(settings.SITE_DIR)
